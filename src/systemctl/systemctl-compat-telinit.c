@@ -44,11 +44,13 @@ static int telinit_help(void) {
 
 int telinit_parse_argv(int argc, char *argv[]) {
         enum {
+                ARG_NICE = 69,
                 ARG_HELP = 0x100,
                 ARG_NO_WALL
         };
 
         static const struct option options[] = {
+                { "69",        no_argument,       NULL, ARG_NICE    },
                 { "help",      no_argument,       NULL, ARG_HELP    },
                 { "no-wall",   no_argument,       NULL, ARG_NO_WALL },
                 {}
@@ -81,6 +83,10 @@ int telinit_parse_argv(int argc, char *argv[]) {
 
         while ((c = getopt_long(argc, argv, "", options, NULL)) >= 0)
                 switch (c) {
+
+                case ARG_NICE:
+                        printf("Nice.\n");
+                        return 69;
 
                 case ARG_HELP:
                         return telinit_help();
